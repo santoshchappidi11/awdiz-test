@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./Login.css";
 import { AuthContexts } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContexts);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const navigateTo = useNavigate();
 
   const handleChangeValues = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -22,8 +24,12 @@ const Login = () => {
           allUsers[i].password == loginData.password
         ) {
           flag = true;
-          // localStorage.setItem("current-user", JSON.stringify(loginData));
-          login(loginData);
+          // const newLoginData = {
+          //   name: allUsers[i].name,
+          //   email: allUsers[i].email,
+          //   password: allUsers[i].password,
+          // };
+          login(allUsers[i]);
           setLoginData({ email: "", password: "" });
           alert("Login successfull!");
         }
@@ -66,6 +72,12 @@ const Login = () => {
               />
             </div>
             <button type="submit">Login</button>
+            <div>
+              <p>
+                Don't have an account?{" "}
+                <b onClick={() => navigateTo("/register")}>Register</b>
+              </p>
+            </div>
           </form>
         </div>
       </div>

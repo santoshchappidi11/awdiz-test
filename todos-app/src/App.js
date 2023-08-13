@@ -6,10 +6,12 @@ import Register from "./components/Register/Register";
 import AllTodos from "./components/Todos/AllTodos";
 import CreateTodo from "./components/Todos/CreateTodo";
 import OwnTodos from "./components/Todos/OwnTodos";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />

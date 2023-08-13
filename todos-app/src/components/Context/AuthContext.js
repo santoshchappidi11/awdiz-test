@@ -1,8 +1,8 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 export const AuthContexts = createContext();
 
-const initalState = {
+const initialState = {
   currentUser: null,
   allTodos: [],
 };
@@ -21,7 +21,8 @@ const reducer = (state, action) => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initalState);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // console.log(state);
 
   const login = (userData) => {
     localStorage.setItem("current-user", JSON.stringify(userData));
@@ -45,6 +46,20 @@ const AuthProvider = ({ children }) => {
       payload: todosData,
     });
   };
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("current-user"));
+    dispatch({
+      type: "LOGIN",
+      payload: userData,
+    });
+
+    const todosData = JSON.parse(localStorage.getItem("todos"));
+    dispatch({
+      type: "TODOS",
+      payload: todosData,
+    });
+  }, []);
 
   return (
     <AuthContexts.Provider value={{ state, login, logout, todos }}>

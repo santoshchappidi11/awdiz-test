@@ -36,48 +36,54 @@ const Register = () => {
   };
 
   return (
-   <div id="screen">
-     <div id="register">
-      <div id="register-header">
-        <h3>Register</h3>
-      </div>
-      <div id="register-main">
-        <form onSubmit={handleRegisterSubmit}>
-          <div className="fields">
-            <label>Enter Your Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter Your Name"
-              value={registerData.name}
-              onChange={handleChangeValues}
-            />
-          </div>
-          <div className="fields">
-            <label>Enter Your Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Your Email"
-              value={registerData.email}
-              onChange={handleChangeValues}
-            />
-          </div>
-          <div className="fields">
-            <label>Enter Your Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter Your password"
-              value={registerData.password}
-              onChange={handleChangeValues}
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form>
+    <div id="screen">
+      <div id="register">
+        <div id="register-header">
+          <h3>Register</h3>
+        </div>
+        <div id="register-main">
+          <form onSubmit={handleRegisterSubmit}>
+            <div className="fields">
+              <label>Enter Your Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter Your Name"
+                value={registerData.name}
+                onChange={handleChangeValues}
+              />
+            </div>
+            <div className="fields">
+              <label>Enter Your Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
+                value={registerData.email}
+                onChange={handleChangeValues}
+              />
+            </div>
+            <div className="fields">
+              <label>Enter Your Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Your password"
+                value={registerData.password}
+                onChange={handleChangeValues}
+              />
+            </div>
+            <button type="submit">Register</button>
+            <div>
+              <p>
+                Already have an account?{" "}
+                <b onClick={() => navigateTo("/login")}>Login</b>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-   </div>
   );
 };
 

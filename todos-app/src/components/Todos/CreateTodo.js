@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./CreateTodos.css";
 import { AuthContexts } from "../Context/AuthContext";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateTodo = () => {
   const { state, todos } = useContext(AuthContexts);
@@ -26,17 +27,34 @@ const CreateTodo = () => {
     e.preventDefault();
 
     if (createTodoData.subject && createTodoData.description) {
-      if (currentUser) {
-        const todosLS = JSON.parse(localStorage.getItem("todos")) || [];
-        todosLS.push(createTodoData);
-        todos(todosLS);
+      let flag = false;
+      if (currentUser?.email) {
+        flag = true;
+        const allUsers = JSON.parse(localStorage.getItem("users")) || [];
+        for (let i = 0; i < allUsers.length; i++) {
+          if (
+            allUsers[i].email == currentUser.email &&
+            allUsers[i].password == currentUser.password
+          ) {
+            let randomId = uuidv4();
+            createTodoData["id"] = randomId;
+            allUsers[i].ownTodos.push(createTodoData);
+            const todosLS = JSON.parse(localStorage.getItem("todos")) || [];
+            todosLS.push(createTodoData);
+            todos(todosLS);
+          }
+        }
+        localStorage.setItem("users", JSON.stringify(allUsers));
+        setCreateTodoData({
+          subject: "",
+          description: "",
+        });
+        alert("New Todo created Successfully!");
       }
-      // localStorage.setItem("users", JSON.stringify(allUsers));
-      setCreateTodoData({
-        subject: "",
-        description: "",
-      });
-      alert("New Todo created Successfully!");
+
+      if (flag == false) {
+        alert("Please login to create todo");
+      }
     } else {
       alert("Please fill all the details!");
     }

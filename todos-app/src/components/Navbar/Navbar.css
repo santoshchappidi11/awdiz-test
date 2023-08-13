@@ -1,0 +1,29 @@
+#navbar {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  border-bottom: 1px solid black;
+}
+
+#navbar > #logo {
+  width: 10%;
+}
+
+#navbar > #logo > h2 {
+  cursor: pointer;
+}
+
+#navbar > #nav-items {
+  width: 60%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#navbar > #nav-items > h3 {
+  margin: 0 50px 0 0;
+  cursor: pointer;
+}
